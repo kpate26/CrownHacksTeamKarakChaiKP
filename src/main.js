@@ -60,18 +60,6 @@ function modal(event) {
   document.body.insertAdjacentHTML('beforeend', `<div class="modal-backdrop" data-action="close-modal"><div class="join-modal"><button class="modal-close" data-action="close-modal" aria-label="Close">${icon('x', 18)}</button><div class="modal-check">${icon('check', 26)}</div><p class="eyebrow">You’re on the list</p><h2>${event.title}</h2><p>We’ll send the details to your inbox. Thanks for making space for something good.</p><button class="modal-action" data-action="close-modal">Done ${icon('arrow', 16)}</button></div></div>`);
 }
 
-function renderApp() {
-  document.querySelector('#root').innerHTML = `<div class="app-shell">
-    <header class="topbar"><a class="brand" href="#top"><span class="brand-mark">${icon('sparkles', 16)}</span>Volo</a><nav><a href="#discover">Discover</a><a href="#how-it-works">How it works</a><a href="#about">About us</a></nav><button class="profile-button"><span>JD</span> Jordan ${icon('chevron', 15)}</button></header>
-    <main id="top"><section class="hero"><div class="hero-copy"><p class="eyebrow"><span class="eyebrow-dot"></span>Make a little room for good</p><h1>Small actions.<br><em>Real change.</em></h1><p class="hero-subtitle">Find meaningful ways to show up for your community, right around the corner.</p><div class="hero-search">${icon('search', 20)}<input id="search-input" placeholder="Search by cause, place, or activity"><button data-action="explore">Explore</button></div><div class="location-picker">${icon('mapPin', 15)}<span>Showing events near</span><button data-action="location">${state.location} ${icon('chevron', 14)}</button></div></div><div class="hero-art" aria-label="Volunteers planting flowers together"><div class="sun-stamp"><span>YOUR<br>TIME<br><b>MATTERS</b></span></div><div class="hero-note">${icon('users', 15)}<span><b>2,400+</b><small>neighbors helping today</small></span></div></div></section>
-    <section class="discover-section" id="discover"><div class="section-heading"><div><p class="eyebrow">A good place to start</p><h2>Events near you</h2></div><button class="view-all">View all ${icon('arrow', 16)}</button></div><div class="filter-row"><div class="category-filters">${categories.map((item) => `<button class="${state.category === item ? 'active' : ''}" data-category="${item}">${item}</button>`).join('')}</div><button class="date-filter">${icon('calendar', 16)} This weekend ${icon('chevron', 14)}</button></div><div class="events-grid"></div></section>
-    <section class="impact-strip" id="how-it-works"><div class="impact-intro"><span class="impact-icon">${icon('sparkles', 19)}</span><h2>Good things<br><em>start nearby.</em></h2></div><div class="impact-stat"><strong>18,642</strong><span>hours volunteered<br>this month</span></div><div class="impact-stat"><strong>94</strong><span>local organizations<br>ready for you</span></div><div class="impact-quote">“It’s the easiest way I’ve found to get involved without overthinking it.”<small>— Maya, Charlotte</small></div></section></main>
-    <footer id="about"><div class="brand"><span class="brand-mark">${icon('sparkles', 16)}</span>Volo</div><span>Made for people who care.</span><span class="footer-right">© 2026 Volo</span></footer>
-  </div>`;
-  renderEvents();
-  bindEvents();
-}
-
 function bindEvents() {
   document.querySelector('#search-input').addEventListener('input', (event) => { state.query = event.target.value; renderEvents(); });
   document.querySelector('[data-action="explore"]').addEventListener('click', () => document.querySelector('#discover').scrollIntoView({ behavior: 'smooth' }));
@@ -81,5 +69,6 @@ function bindEvents() {
 }
 
 document.addEventListener('click', (event) => { if (event.target.closest('[data-action="close-modal"]')) document.querySelector('.modal-backdrop')?.remove(); });
-renderApp();
+renderEvents();
+bindEvents();
 getEvents().then((events) => { state.events = events; renderEvents(); });
