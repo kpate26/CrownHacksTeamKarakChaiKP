@@ -7,7 +7,36 @@
     <title>Volo | Find your next good thing</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#top"><span class="brand-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3-1.2 4.8L6 9l4.8 1.2L12 15l1.2-4.8L18 9l-4.8-1.2L12 3Z" /></svg></span>Volo</a>
+        <nav><a href="#discover">Discover</a><a href="#how-it-works">How it works</a><a href="#about">About us</a></nav>
+        <button class="profile-button"><span>JD</span> Jordan <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button>
+      </header>
+
+      <main id="top">
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="eyebrow-dot"></span>Make a little room for good</p>
+            <h1>Small actions.<br><em>Real change.</em></h1>
+            <p class="hero-subtitle">Find meaningful ways to show up for your community, right around the corner.</p>
+            <div class="hero-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-4-4" /></svg><input id="search-input" placeholder="Search by cause, place, or activity"><button data-action="explore">Explore</button></div>
+            <div class="location-picker"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></svg><span>Showing events near</span><button data-action="location">Charlotte, NC <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button></div>
+          </div>
+          <div class="hero-art" aria-label="Volunteers planting flowers together"><div class="sun-stamp"><span>YOUR<br>TIME<br><b>MATTERS</b></span></div><div class="hero-note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" /></svg><span><b>2,400+</b><small>neighbors helping today</small></span></div></div>
+        </section>
+
+        <section class="discover-section" id="discover">
+          <div class="section-heading"><div><p class="eyebrow">A good place to start</p><h2>Events near you</h2></div><button class="view-all">View all <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></button></div>
+          <div class="filter-row"><div class="category-filters"><button class="active" data-category="All events">All events</button><button data-category="Environment">Environment</button><button data-category="Community">Community</button><button data-category="Food access">Food access</button><button data-category="Animals">Animals</button></div><button class="date-filter"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg> This weekend <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button></div>
+          <div class="events-grid"></div>
+        </section>
+
+        <section class="impact-strip" id="how-it-works"><div class="impact-intro"><span class="impact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3-1.2 4.8L6 9l4.8 1.2L12 15l1.2-4.8L18 9l-4.8-1.2L12 3Z" /></svg></span><h2>Good things<br><em>start nearby.</em></h2></div><div class="impact-stat"><strong>18,642</strong><span>hours volunteered<br>this month</span></div><div class="impact-stat"><strong>94</strong><span>local organizations<br>ready for you</span></div><div class="impact-quote">“It’s the easiest way I’ve found to get involved without overthinking it.”<small>— Maya, Charlotte</small></div></section>
+      </main>
+
+      <footer id="about"><div class="brand"><span class="brand-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3-1.2 4.8L6 9l4.8 1.2L12 15l1.2-4.8L18 9l-4.8-1.2L12 3Z" /></svg></span>Volo</div><span>Made for people who care.</span><span class="footer-right">© 2026 Volo</span></footer>
+    </div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
