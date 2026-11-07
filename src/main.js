@@ -2,6 +2,7 @@ import './styles.css';
 import { getEvents } from './lib/events';
 
 const categories = ['All events', 'Environment', 'Community', 'Food access', 'Animals'];
+const savedStorageKey = 'volo-saved';
 const icons = {
   arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
   calendar: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
@@ -24,7 +25,7 @@ const state = {
   events: [],
   category: 'All events',
   query: '',
-  saved: JSON.parse(localStorage.getItem('good-neighbors-saved') || '[]'),
+  saved: JSON.parse(localStorage.getItem(savedStorageKey) || localStorage.getItem('good-neighbors-saved') || '[]'),
   location: 'Charlotte, NC'
 };
 
@@ -61,11 +62,11 @@ function modal(event) {
 
 function renderApp() {
   document.querySelector('#root').innerHTML = `<div class="app-shell">
-    <header class="topbar"><a class="brand" href="#top"><span class="brand-mark">${icon('sparkles', 16)}</span>good neighbors</a><nav><a href="#discover">Discover</a><a href="#how-it-works">How it works</a><a href="#about">About us</a></nav><button class="profile-button"><span>JD</span> Jordan ${icon('chevron', 15)}</button></header>
+    <header class="topbar"><a class="brand" href="#top"><span class="brand-mark">${icon('sparkles', 16)}</span>Volo</a><nav><a href="#discover">Discover</a><a href="#how-it-works">How it works</a><a href="#about">About us</a></nav><button class="profile-button"><span>JD</span> Jordan ${icon('chevron', 15)}</button></header>
     <main id="top"><section class="hero"><div class="hero-copy"><p class="eyebrow"><span class="eyebrow-dot"></span>Make a little room for good</p><h1>Small actions.<br><em>Real change.</em></h1><p class="hero-subtitle">Find meaningful ways to show up for your community, right around the corner.</p><div class="hero-search">${icon('search', 20)}<input id="search-input" placeholder="Search by cause, place, or activity"><button data-action="explore">Explore</button></div><div class="location-picker">${icon('mapPin', 15)}<span>Showing events near</span><button data-action="location">${state.location} ${icon('chevron', 14)}</button></div></div><div class="hero-art" aria-label="Volunteers planting flowers together"><div class="sun-stamp"><span>YOUR<br>TIME<br><b>MATTERS</b></span></div><div class="hero-note">${icon('users', 15)}<span><b>2,400+</b><small>neighbors helping today</small></span></div></div></section>
     <section class="discover-section" id="discover"><div class="section-heading"><div><p class="eyebrow">A good place to start</p><h2>Events near you</h2></div><button class="view-all">View all ${icon('arrow', 16)}</button></div><div class="filter-row"><div class="category-filters">${categories.map((item) => `<button class="${state.category === item ? 'active' : ''}" data-category="${item}">${item}</button>`).join('')}</div><button class="date-filter">${icon('calendar', 16)} This weekend ${icon('chevron', 14)}</button></div><div class="events-grid"></div></section>
     <section class="impact-strip" id="how-it-works"><div class="impact-intro"><span class="impact-icon">${icon('sparkles', 19)}</span><h2>Good things<br><em>start nearby.</em></h2></div><div class="impact-stat"><strong>18,642</strong><span>hours volunteered<br>this month</span></div><div class="impact-stat"><strong>94</strong><span>local organizations<br>ready for you</span></div><div class="impact-quote">“It’s the easiest way I’ve found to get involved without overthinking it.”<small>— Maya, Charlotte</small></div></section></main>
-    <footer id="about"><div class="brand"><span class="brand-mark">${icon('sparkles', 16)}</span>good neighbors</div><span>Made for people who care.</span><span class="footer-right">© 2026 Good Neighbors</span></footer>
+    <footer id="about"><div class="brand"><span class="brand-mark">${icon('sparkles', 16)}</span>Volo</div><span>Made for people who care.</span><span class="footer-right">© 2026 Volo</span></footer>
   </div>`;
   renderEvents();
   bindEvents();
@@ -76,7 +77,7 @@ function bindEvents() {
   document.querySelector('[data-action="explore"]').addEventListener('click', () => document.querySelector('#discover').scrollIntoView({ behavior: 'smooth' }));
   document.querySelector('[data-action="location"]').addEventListener('click', () => { state.location = state.location === 'Charlotte, NC' ? 'Your location' : 'Charlotte, NC'; document.querySelector('[data-action="location"]').innerHTML = `${state.location} ${icon('chevron', 14)}`; });
   document.querySelectorAll('[data-category]').forEach((button) => button.addEventListener('click', () => { state.category = button.dataset.category; document.querySelectorAll('[data-category]').forEach((item) => item.classList.toggle('active', item === button)); renderEvents(); }));
-  document.querySelector('.events-grid').addEventListener('click', (event) => { const button = event.target.closest('[data-action]'); if (!button) return; const item = state.events.find((entry) => entry.id === button.dataset.id); if (button.dataset.action === 'save') { state.saved = state.saved.includes(item.id) ? state.saved.filter((id) => id !== item.id) : [...state.saved, item.id]; localStorage.setItem('good-neighbors-saved', JSON.stringify(state.saved)); renderEvents(); } else modal(item); });
+  document.querySelector('.events-grid').addEventListener('click', (event) => { const button = event.target.closest('[data-action]'); if (!button) return; const item = state.events.find((entry) => entry.id === button.dataset.id); if (button.dataset.action === 'save') { state.saved = state.saved.includes(item.id) ? state.saved.filter((id) => id !== item.id) : [...state.saved, item.id]; localStorage.setItem(savedStorageKey, JSON.stringify(state.saved)); renderEvents(); } else modal(item); });
 }
 
 document.addEventListener('click', (event) => { if (event.target.closest('[data-action="close-modal"]')) document.querySelector('.modal-backdrop')?.remove(); });

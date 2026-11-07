@@ -1,6 +1,6 @@
-# Good Neighbors
+# Volo
 
-Good Neighbors is a Vite + vanilla JavaScript volunteer discovery app for finding local events and signing up to help.
+Volo is a Vite + vanilla JavaScript volunteer discovery app for finding local events and signing up to help.
 
 ## Run locally
 
